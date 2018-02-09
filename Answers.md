@@ -1,10 +1,10 @@
-1.
+1. a) and c) are NOT possible address space ranges because the ending address is exclusive. Meaning, 0-32000 is valid as the inclusive range is 0-31999 = 32KB. But 32,001-64000 = 31999B != 32KB. (See more on vm_area_struct at: https://www3.cs.stonybrook.edu/~porter/courses/cse506/f11/slides/address-spaces.pdf, http://www.informit.com/articles/article.aspx?p=29961&seqNum=2, and https://www.kernel.org/doc/gorman/html/understand/understand007.html). This leaves just b) as a possibility and this assumes the processes are using shared address space.
 
 
-2. 
+2. 1) Start - The initial state of a process when first started. 2) Ready - A process that is waiting for the OS to assign it a processor. 3) Running - A process that has been assigned to a processor by the OS scheduler. 4) Waiting - A process that is waiting for a resource such as user input or file access. 5) Terminated/Exit - A process that is either terminated and is waiting to be removed from memory or it finished its execution.
 
 
-3. 
+3. On my machine, which is an Ubuntu VM, write() is faster than printf(). I tested this with both clock_gettime() and clock(), I also tested it by running the printf loop first and then the write loop and vice versa. I even ran each case separately. I've included my test files, printfVSwrite.c and getTime.c, for your perusal. My last run of getTime.c resulted in printf() = 14023171920ns and write() = 12949398006ns. My last run of printfVSwrite.c resulted in printf() = 3421331 clock ticks and write() = 3137678 clock ticks. I'm running gcc version 5.4.0 201600609 (Ubuntu 5.4.0-6ubuntu1-16.04.6).
 
 
-4.
+4. Due to write() being faster on my system I am not directly able to answer this question. However, I can posit that there is some sort of compiler optimizations occuring to give this performance difference. Or, I am simply implementing write() incorrectly for the test case.
